@@ -20,6 +20,7 @@ public class leetcode_179 {
         {
          ans+=arr[i];
         }
+        if(ans.charAt(0)=='0') return "0";
         return  ans;
     }
 }
