@@ -1,40 +1,28 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class trypro {
+    final static int MOD = (int)1e9+7;
     public static void main(String[] args) {
-       int[] arry={
-               1,1,2
-       };
-        List<List<Integer>> ans=permuteUnique(arry);
-        System.out.println(ans);
-    }
-    public static List<List<Integer>>  permuteUnique(int[] nums) {
-        List<List<Integer>> result = new ArrayList<>();
-        permuteHelper(nums, result, new ArrayList<>());
-
-        return result;
-    }
-    private static void permuteHelper(int nums[], List<List<Integer>> result, List<Integer> temp){
-
-        if(temp.size() == nums.length){
-            if(!result.contains(temp))
-            result.add(new ArrayList<>(temp));
-
-            return;
+        int[] nums={2,3,3,4,6,7};
+        int target=12;
+        int n= nums.length;
+        int[] f = new int[n];
+        f[0] = 1;
+        for (int i = 1; i < n; i++)
+            f[i] = (f[i - 1] << 1) % MOD;
+        int l = 0, r = n-1;
+        int ans = 0;
+        while (l <= r) {
+            if (nums[l] + nums[r] > target)
+                r--;
+            else {
+                ans = (ans + f[r - l]) % MOD;
+                System.out.println((f[r-l]));
+                l++;
+            }
         }
 
 
-        for(int num: nums){
-
-
-            temp.add(num);
-
-            permuteHelper(nums, result, temp);
-
-            temp.remove(temp.size()-1);
-        }
 
     }
 }
